@@ -35,18 +35,18 @@ class ConnectycubeFlutterCallKit {
   static Function(
     String sessionId,
     int callType,
-    int callerId,
+    String callerId,
     String callerName,
-    Set<int> opponentsIds,
+    Set<String> opponentsIds,
     Map<String, String>? userInfo,
   )? onCallRejectedWhenTerminated;
 
   static Function(
     String sessionId,
     int callType,
-    int callerId,
+    String callerId,
     String callerName,
-    Set<int> opponentsIds,
+    Set<String> opponentsIds,
     Map<String, String>? userInfo,
   )? onCallAcceptedWhenTerminated;
 
@@ -69,9 +69,9 @@ class ConnectycubeFlutterCallKit {
   static Future<void> showCallNotification({
     required String? sessionId,
     required int? callType,
-    required int? callerId,
+    required String? callerId,
     required String? callerName,
-    required Set<int>? opponentsIds,
+    required Set<String>? opponentsIds,
     Map<String, String>? userInfo,
   }) async {
     if (!Platform.isAndroid) return;
@@ -186,7 +186,7 @@ class ConnectycubeFlutterCallKit {
             map["caller_name"],
             (map["call_opponents"] as String)
                 .split(',')
-                .map((stringUserId) => int.parse(stringUserId))
+                .map((stringUserId) => stringUserId)
                 .toSet(),
             userInfoParsed,
           );
@@ -198,9 +198,9 @@ class ConnectycubeFlutterCallKit {
             map["call_type"],
             map["caller_id"],
             map["caller_name"],
-            (map["call_opponents"] as String)
+            (map["call_opponents"])
                 .split(',')
-                .map((stringUserId) => int.parse(stringUserId))
+                .map((stringUserId) => stringUserId)
                 .toSet(),
             userInfoParsed,
           );
@@ -220,9 +220,9 @@ class ConnectycubeFlutterCallKit {
             map["call_type"],
             map["caller_id"],
             map["caller_name"],
-            (map["call_opponents"] as String)
+            (map["call_opponents"])
                 .split(',')
-                .map((stringUserId) => int.parse(stringUserId))
+                .map((stringUserId) => stringUserId)
                 .toSet(),
             userInfoParsed,
           );
@@ -234,9 +234,9 @@ class ConnectycubeFlutterCallKit {
             map["call_type"],
             map["caller_id"],
             map["caller_name"],
-            (map["call_opponents"] as String)
+            (map["call_opponents"])
                 .split(',')
-                .map((stringUserId) => int.parse(stringUserId))
+                .map((stringUserId) => stringUserId)
                 .toSet(),
             userInfoParsed,
           );

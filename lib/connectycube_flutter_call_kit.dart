@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 typedef Future<dynamic> CallEventHandler(
   String sessionId,
   int callType,
-  int callerId,
+  String callerId,
   String callerName,
-  Set<int> opponentsIds,
+  Set<String> opponentsIds,
   Map<String, String>? userInfo,
 );
 

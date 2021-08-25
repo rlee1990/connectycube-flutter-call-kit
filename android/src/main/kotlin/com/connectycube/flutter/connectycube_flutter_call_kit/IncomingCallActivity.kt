@@ -17,8 +17,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 
 fun createStartIncomingScreenIntent(
-    context: Context, callId: String, callType: Int, callInitiatorId: Int,
-    callInitiatorName: String, opponents: ArrayList<Int>, userInfo: String
+    context: Context, callId: String, callType: Int, callInitiatorId: String,
+    callInitiatorName: String, opponents: ArrayList<String>, userInfo: String
 ): Intent {
     val intent = Intent(context, IncomingCallActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -26,7 +26,7 @@ fun createStartIncomingScreenIntent(
     intent.putExtra(EXTRA_CALL_TYPE, callType)
     intent.putExtra(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
     intent.putExtra(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-    intent.putIntegerArrayListExtra(EXTRA_CALL_OPPONENTS, opponents)
+    intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS, opponents)
     intent.putExtra(EXTRA_CALL_USER_INFO, userInfo)
     return intent
 }
@@ -37,7 +37,7 @@ class IncomingCallActivity : Activity() {
 
     private var callId: String? = null
     private var callType = -1
-    private var callInitiatorId = -1
+    private var callInitiatorId String? = null
     private var callInitiatorName: String? = null
     private var callOpponents: ArrayList<Int>? = ArrayList()
     private var callUserInfo: String? = null
@@ -112,7 +112,7 @@ class IncomingCallActivity : Activity() {
     private fun processIncomingData(intent: Intent) {
         callId = intent.getStringExtra(EXTRA_CALL_ID)
         callType = intent.getIntExtra(EXTRA_CALL_TYPE, -1)
-        callInitiatorId = intent.getIntExtra(EXTRA_CALL_INITIATOR_ID, -1)
+        callInitiatorId = intent.getString(EXTRA_CALL_INITIATOR_ID, -1)
         callInitiatorName = intent.getStringExtra(EXTRA_CALL_INITIATOR_NAME)
         callOpponents = intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS)
         callUserInfo = intent.getStringExtra(EXTRA_CALL_USER_INFO)
@@ -133,7 +133,7 @@ class IncomingCallActivity : Activity() {
         val bundle = Bundle()
         bundle.putString(EXTRA_CALL_ID, callId)
         bundle.putInt(EXTRA_CALL_TYPE, callType)
-        bundle.putInt(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
+        bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
         bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
         bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
         bundle.putString(EXTRA_CALL_USER_INFO, callUserInfo)
@@ -149,7 +149,7 @@ class IncomingCallActivity : Activity() {
         val bundle = Bundle()
         bundle.putString(EXTRA_CALL_ID, callId)
         bundle.putInt(EXTRA_CALL_TYPE, callType)
-        bundle.putInt(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
+        bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
         bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
         bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
         bundle.putString(EXTRA_CALL_USER_INFO, callUserInfo)

@@ -27,7 +27,7 @@ fun cancelCallNotification(context: Context, callId: String) {
 
 fun showCallNotification(
     context: Context, callId: String, callType: Int, callInitiatorId: String,
-    callInitiatorName: String, callOpponents: ArrayList<Int>, userInfo: String
+    callInitiatorName: String, callOpponents: ArrayList<String>, userInfo: String
 ) {
     val notificationManager = NotificationManagerCompat.from(context)
 
@@ -143,7 +143,7 @@ fun addCallRejectAction(
     callType: Int,
     callInitiatorId: String,
     callInitiatorName: String,
-    opponents: ArrayList<Int>,
+    opponents: ArrayList<String>,
     userInfo: String
 ) {
     val bundle = Bundle()
@@ -151,7 +151,7 @@ fun addCallRejectAction(
     bundle.putInt(EXTRA_CALL_TYPE, callType)
     bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
     bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-    bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, opponents)
+    bundle.putStringArrayList(EXTRA_CALL_OPPONENTS, opponents)
     bundle.putString(EXTRA_CALL_USER_INFO, userInfo)
 
     val declinePendingIntent: PendingIntent = PendingIntent.getBroadcast(
@@ -183,7 +183,7 @@ fun addCallAcceptAction(
     callType: Int,
     callInitiatorId: String,
     callInitiatorName: String,
-    opponents: ArrayList<Int>,
+    opponents: ArrayList<String>,
     userInfo: String
 ) {
     val bundle = Bundle()
@@ -191,7 +191,7 @@ fun addCallAcceptAction(
     bundle.putInt(EXTRA_CALL_TYPE, callType)
     bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
     bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-    bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, opponents)
+    bundle.putStringArrayList(EXTRA_CALL_OPPONENTS, opponents)
     bundle.putString(EXTRA_CALL_USER_INFO, userInfo)
 
     val acceptPendingIntent: PendingIntent = PendingIntent.getBroadcast(
@@ -218,7 +218,7 @@ fun addCallFullScreenIntent(
     callType: Int,
     callInitiatorId: String,
     callInitiatorName: String,
-    callOpponents: ArrayList<Int>,
+    callOpponents: ArrayList<String>,
     userInfo: String
 ) {
     val callFullScreenIntent: Intent = createStartIncomingScreenIntent(

@@ -184,7 +184,7 @@ class ConnectycubeFlutterCallKit {
             map["call_type"],
             map["caller_id"],
             map["caller_name"],
-            (map["call_opponents"] as String)
+            (map["call_opponents"])
                 .split(',')
                 .map((stringUserId) => stringUserId)
                 .toSet(),

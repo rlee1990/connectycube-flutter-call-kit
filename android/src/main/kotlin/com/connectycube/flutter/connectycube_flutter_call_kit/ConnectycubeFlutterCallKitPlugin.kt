@@ -248,7 +248,7 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
         val parameters = HashMap<String, Any?>()
         parameters["session_id"] = callIdToProcess
         parameters["call_type"] = intent.getIntExtra(EXTRA_CALL_TYPE, -1)
-        parameters["caller_id"] = intent.getStringExtra(EXTRA_CALL_INITIATOR_ID, -1)
+        parameters["caller_id"] = intent.getStringExtra(EXTRA_CALL_INITIATOR_ID)
         parameters["caller_name"] = intent.getStringExtra(EXTRA_CALL_INITIATOR_NAME)
         parameters["call_opponents"] =
             intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS)?.joinToString(separator = ",")

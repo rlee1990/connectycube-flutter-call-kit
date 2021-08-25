@@ -26,7 +26,7 @@ fun createStartIncomingScreenIntent(
     intent.putExtra(EXTRA_CALL_TYPE, callType)
     intent.putExtra(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
     intent.putExtra(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-    intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS, opponents)
+    intent.putStringArrayListExtra(EXTRA_CALL_OPPONENTS, opponents)
     intent.putExtra(EXTRA_CALL_USER_INFO, userInfo)
     return intent
 }
@@ -37,9 +37,9 @@ class IncomingCallActivity : Activity() {
 
     private var callId: String? = null
     private var callType = -1
-    private var callInitiatorId String? = null
+    private var callInitiatorId: String? = null
     private var callInitiatorName: String? = null
-    private var callOpponents: ArrayList<Int>? = ArrayList()
+    private var callOpponents: ArrayList<String>? = ArrayList()
     private var callUserInfo: String? = null
 
 
@@ -112,9 +112,9 @@ class IncomingCallActivity : Activity() {
     private fun processIncomingData(intent: Intent) {
         callId = intent.getStringExtra(EXTRA_CALL_ID)
         callType = intent.getIntExtra(EXTRA_CALL_TYPE, -1)
-        callInitiatorId = intent.getString(EXTRA_CALL_INITIATOR_ID, -1)
+        callInitiatorId = intent.getStringExtra(EXTRA_CALL_INITIATOR_ID)
         callInitiatorName = intent.getStringExtra(EXTRA_CALL_INITIATOR_NAME)
-        callOpponents = intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS)
+        callOpponents = intent.getStringArrayListExtra(EXTRA_CALL_OPPONENTS)
         callUserInfo = intent.getStringExtra(EXTRA_CALL_USER_INFO)
     }
 
@@ -135,7 +135,7 @@ class IncomingCallActivity : Activity() {
         bundle.putInt(EXTRA_CALL_TYPE, callType)
         bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
         bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-        bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
+        bundle.putStringArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
         bundle.putString(EXTRA_CALL_USER_INFO, callUserInfo)
 
         val endCallIntent = Intent(this, EventReceiver::class.java)
@@ -151,7 +151,7 @@ class IncomingCallActivity : Activity() {
         bundle.putInt(EXTRA_CALL_TYPE, callType)
         bundle.putString(EXTRA_CALL_INITIATOR_ID, callInitiatorId)
         bundle.putString(EXTRA_CALL_INITIATOR_NAME, callInitiatorName)
-        bundle.putIntegerArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
+        bundle.putStringArrayList(EXTRA_CALL_OPPONENTS, callOpponents)
         bundle.putString(EXTRA_CALL_USER_INFO, callUserInfo)
 
         val startCallIntent = Intent(this, EventReceiver::class.java)

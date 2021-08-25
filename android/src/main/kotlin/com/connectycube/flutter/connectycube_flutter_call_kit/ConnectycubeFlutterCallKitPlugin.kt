@@ -64,8 +64,7 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
                     val callInitiatorId = arguments["caller_id"] as String
                     val callInitiatorName = arguments["caller_name"] as String
                     val callOpponents = ArrayList((arguments["call_opponents"] as String)
-                        .split(',')
-                        .map { it.toInt() })
+                        .split(','))
                     val userInfo = arguments["user_info"] as String
 
                     showCallNotification(
@@ -251,7 +250,7 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
         parameters["caller_id"] = intent.getStringExtra(EXTRA_CALL_INITIATOR_ID)
         parameters["caller_name"] = intent.getStringExtra(EXTRA_CALL_INITIATOR_NAME)
         parameters["call_opponents"] =
-            intent.getIntegerArrayListExtra(EXTRA_CALL_OPPONENTS)?.joinToString(separator = ",")
+            intent.getStringArrayListExtra(EXTRA_CALL_OPPONENTS)?.joinToString(separator = ",")
         parameters["user_info"] = intent.getStringExtra(EXTRA_CALL_USER_INFO)
 
         when (action) {

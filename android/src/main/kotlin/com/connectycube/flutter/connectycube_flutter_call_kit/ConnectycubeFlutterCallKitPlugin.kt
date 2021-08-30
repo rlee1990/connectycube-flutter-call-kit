@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.WindowManager
 import androidx.annotation.Keep
 import androidx.annotation.NonNull
@@ -235,12 +236,12 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        print("onReceive called")
+        Log.d("onReceive", "onReceive called")
         if (intent == null || TextUtils.isEmpty(intent.action)) return
         print("onReceive intent not null or empty")
         val action: String? = intent.action
         if (ACTION_CALL_REJECT != action && ACTION_CALL_ACCEPT != action) {
-            print("onReceive rejected")
+            Log.d("onReceive", "onReceive rejected")
             return
         }
         val callIdToProcess: String? = intent.getStringExtra(EXTRA_CALL_ID)
@@ -262,7 +263,7 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
                 channel.invokeMethod("onCallRejected", parameters)
             }
             ACTION_CALL_ACCEPT -> {
-                print("Call Accepted")
+                Log.d("onReceive", "Call Accepted")
                 saveCallState(callIdToProcess!!, CALL_STATE_ACCEPTED)
 
                 channel.invokeMethod("onCallAccepted", parameters)

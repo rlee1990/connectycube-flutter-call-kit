@@ -13,7 +13,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 class EventReceiver : BroadcastReceiver() {
     private val TAG = "EventReceiver"
     override fun onReceive(context: Context, intent: Intent?) {
-
         if (intent == null || TextUtils.isEmpty(intent.action)) return
 
         when (intent.action) {

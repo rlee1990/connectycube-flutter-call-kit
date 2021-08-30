@@ -235,10 +235,12 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
+        print("onReceive called")
         if (intent == null || TextUtils.isEmpty(intent.action)) return
-
+        print("onReceive intent not null or empty")
         val action: String? = intent.action
         if (ACTION_CALL_REJECT != action && ACTION_CALL_ACCEPT != action) {
+            print("onReceive rejected")
             return
         }
         val callIdToProcess: String? = intent.getStringExtra(EXTRA_CALL_ID)
@@ -260,6 +262,7 @@ class ConnectycubeFlutterCallKitPlugin : FlutterPlugin, MethodCallHandler,
                 channel.invokeMethod("onCallRejected", parameters)
             }
             ACTION_CALL_ACCEPT -> {
+                print("Call Accepted")
                 saveCallState(callIdToProcess!!, CALL_STATE_ACCEPTED)
 
                 channel.invokeMethod("onCallAccepted", parameters)
